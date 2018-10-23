@@ -18,7 +18,7 @@ if ($original_folder == "root") {
 $original_name = $_GET['file'];
 $newsize = $_GET['size'] ? $_GET['size'] : 500;
 
-$url = $original_folder ? $bucket_url . "/" . $original_folder . "/" . urlencode($original_name) : $bucket_url . "/" . urlencode($original_name)  ; 
+$url = $original_folder ? $bucket_url . "/" . $original_folder . "/" . urlencode($original_name) : $bucket_url . "/" . urlencode($original_name)  ;
 $original_extension = pathinfo($url, PATHINFO_EXTENSION);
 $original_name_no_extension = pathinfo($url, PATHINFO_FILENAME);
 $original_img = $cache_folder . "/" . $original_folder . "_" . $original_name;
@@ -42,7 +42,7 @@ if ($width >= $height) {
 }
 else {
     $new_height = $newsize;
-    $new_width = floor($width / ($height / $newsize));   
+    $new_width = floor($width / ($height / $newsize));
 }
 
 $image_p = imagecreatetruecolor($new_width, $new_height);

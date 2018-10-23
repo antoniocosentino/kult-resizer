@@ -1,0 +1,11 @@
+version: '3'
+services:
+  kult-resizer:
+    image: 'kult-resizer:local-latest'
+    build:
+      context: '.'
+      dockerfile: 'Dockerfile'
+    ports:
+      - 80:80
+    volumes:
+       - ./src:/var/www/html
