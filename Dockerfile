@@ -1,5 +1,7 @@
 FROM php:7.0-apache
 
+RUN a2enmod rewrite
+
 RUN apt-get update -qq && apt-get install -y -qq \
         libicu-dev \
         libfreetype6-dev \

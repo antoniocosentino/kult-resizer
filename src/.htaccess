@@ -1,0 +1,4 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^([^/]*)/([^/]*)/([^/]*)$ /?folder=$1&size=$2&file=$3 [L]
+</IfModule>
