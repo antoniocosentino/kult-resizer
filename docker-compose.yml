@@ -1,6 +1,8 @@
 version: '3'
 services:
   kult-resizer:
+    env_file:
+      variables.env
     image: 'kult-resizer:local-latest'
     build:
       context: '.'
