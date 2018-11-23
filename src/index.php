@@ -1,10 +1,21 @@
 <?php
+$env_debug_mode = getenv("DEBUG_MODE");
+
+if ($env_debug_mode == 0){
+    $debug_mode = false;
+}
+else {
+    $debug_mode = true;
+}
+
 if (!$_GET['file']) {
     echo "please provide filename";
     exit;
 }
 
-header('Content-Type: image/jpeg');
+if (!$debug_mode) {
+    header('Content-Type: image/jpeg');
+}
 
 include("config.inc.php");
 
@@ -26,12 +37,23 @@ $resized_file = $cache_folder . "/" . $original_folder . "_" . $original_name_no
 
 // if file already exists in the cache we just output it
 if (file_exists($resized_file)) {
+    if ($debug_mode) {
+        echo "FILE EXISTS";
+        exit;
+    }
     readfile($resized_file);
     exit;
 }
 
 // downloading the original file
-file_put_contents($original_img, file_get_contents($url));
+$thedownload = file_put_contents($original_img, file_get_contents($url));
+
+if ($thedownload && $debug_mode) {
+    echo "DOWNLOAD SUCCESSFUL";
+}
+else if (!$thedownload && $debug_mode) {
+    echo "DOWNLOAD PROBLEM";
+}
 
 list($width, $height) = getimagesize($original_img);
 
@@ -46,13 +68,41 @@ else {
 }
 
 $image_p = imagecreatetruecolor($new_width, $new_height);
-$image = imagecreatefromjpeg($original_img);
-imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
-// output image to browser
-imagejpeg($image_p, null, 100);
+if ($debug_mode){
+    echo "<br />";
+    echo "IMAGE P: ";
+    print_r($image_p);
+}
+
+$image = imagecreatefromjpeg($original_img);
+
+if ($debug_mode){
+    echo "<br />";
+    echo "IMAGE: ";
+    print_r($image);
+}
+
+$copy_resampled = imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+if ($copy_resampled && $debug_mode)
+{
+    echo "<br />";
+    echo "Copy resampled done";
+}
+
+if (!$debug_mode) {
+    // output image to browser
+    imagejpeg($image_p, null, 100);
+}
 // save resized image to cache folder
-imagejpeg($image_p, $resized_file, 100);
+$thecopy = imagejpeg($image_p, $resized_file, 100);
+
+if ($thecopy && $debug_mode)
+{
+    echo "<br />";
+    echo "Copy done";
+}
 
 // delete original image from disk
 unlink($original_img);

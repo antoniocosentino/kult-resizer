@@ -1,9 +1,12 @@
 <?
 $cache_folder = getenv("CACHE_FOLDER");
 $bucket_url = getenv("BUCKET_URL");
+$debug_mode = getenv("DEBUG_MODE");
 ?>
-<pre>
-Env variables test
+<h3>Env variables test</h3>
 Cache Folder: <?= $cache_folder ?>
-Bucket Url:   <?= $bucket_url   ?>
+<br />
+Bucket Url: <?= $bucket_url   ?>
+<br />
+Debug Mode: <?= $debug_mode ?>
 </pre>
