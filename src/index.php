@@ -63,7 +63,7 @@ if ($thecopy && $debug_mode) {
     echo "<br />";
     echo "COPY SUCCESSFUL";
 }
-else if (!$thedownload && $debug_mode) {
+else if (!$thecopy && $debug_mode) {
     echo "<br />";
     echo "COPY PROBLEM";
 }
