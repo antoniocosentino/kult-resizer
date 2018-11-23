@@ -44,16 +44,30 @@ if (file_exists($resized_file)) {
     readfile($resized_file);
     exit;
 }
-
 // downloading the original file
-$thedownload = file_put_contents($original_img, file_get_contents($url));
+$thedownload = file_get_contents($url);
 
 if ($thedownload && $debug_mode) {
+    echo "<br />";
     echo "DOWNLOAD SUCCESSFUL";
 }
 else if (!$thedownload && $debug_mode) {
+    echo "<br />";
     echo "DOWNLOAD PROBLEM";
 }
+
+// copying it in the cache folder
+$thecopy = file_put_contents($original_img, $thedownload);
+
+if ($thecopy && $debug_mode) {
+    echo "<br />";
+    echo "COPY SUCCESSFUL";
+}
+else if (!$thedownload && $debug_mode) {
+    echo "<br />";
+    echo "COPY PROBLEM";
+}
+
 
 list($width, $height) = getimagesize($original_img);
 
@@ -96,9 +110,9 @@ if (!$debug_mode) {
     imagejpeg($image_p, null, 100);
 }
 // save resized image to cache folder
-$thecopy = imagejpeg($image_p, $resized_file, 100);
+$theresizedcopy = imagejpeg($image_p, $resized_file, 100);
 
-if ($thecopy && $debug_mode)
+if ($theresizedcopy && $debug_mode)
 {
     echo "<br />";
     echo "Copy done";
