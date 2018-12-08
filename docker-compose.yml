@@ -8,6 +8,6 @@ services:
       context: '.'
       dockerfile: 'Dockerfile'
     ports:
-      - 80:80
+      - 1811:80
     volumes:
        - ./src:/var/www/html

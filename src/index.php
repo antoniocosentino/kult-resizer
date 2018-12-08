@@ -71,14 +71,20 @@ else if (!$thecopy && $debug_mode) {
 
 list($width, $height) = getimagesize($original_img);
 
+if (strpos($newsize, "x")) {
+    $contain = true;
+    $sizearr = explode("x", $newsize);
+    $smaller_value = min($sizearr);
+}
+
 // checking if portrait or landscape
 if ($width >= $height) {
-    $new_width = $newsize;
-    $new_height = floor($height / ($width / $newsize));
+    $new_width = $contain === true ? $smaller_value : $newsize;
+    $new_height = floor($height / ($width / $new_width));
 }
 else {
-    $new_height = $newsize;
-    $new_width = floor($width / ($height / $newsize));
+    $new_height = $contain === true ? $smaller_value : $newsize;
+    $new_width = floor($width / ($height / $new_height));
 }
 
 $image_p = imagecreatetruecolor($new_width, $new_height);
