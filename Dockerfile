@@ -39,7 +39,8 @@ RUN docker-php-ext-install iconv mcrypt mbstring \
 
 COPY src /var/www/html/
 
-ADD /src/start.sh /home/root/start.sh
+ADD /start.sh /home/root/start.sh
 RUN chmod 777 /home/root/start.sh
+CMD /home/root/start.sh
 
 EXPOSE 80
