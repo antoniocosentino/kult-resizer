@@ -74,17 +74,28 @@ list($width, $height) = getimagesize($original_img);
 if (strpos($newsize, "x")) {
     $contain = true;
     $sizearr = explode("x", $newsize);
-    $smaller_value = min($sizearr);
+    $width_contained = $sizearr[0];
+    $height_contained = $sizearr[1];
 }
 
 // checking if portrait or landscape
 if ($width >= $height) {
-    $new_width = $contain === true ? $smaller_value : $newsize;
+    $new_width = $contain === true ? $width_contained : $newsize;
     $new_height = floor($height / ($width / $new_width));
+
+    if ($contain && $new_height > $height_contained){
+        $new_height = $height_contained;
+        $new_width = floor($width / ($height / $new_height));
+    }
 }
 else {
-    $new_height = $contain === true ? $smaller_value : $newsize;
+    $new_height = $contain === true ? $height_contained : $newsize;
     $new_width = floor($width / ($height / $new_height));
+
+    if ($contain && $new_width > $width_contained){
+        $new_width = $width_contained;
+        $new_height = floor($height / ($width / $new_width));
+    }
 }
 
 $image_p = imagecreatetruecolor($new_width, $new_height);
