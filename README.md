@@ -1,8 +1,10 @@
-# Kult Resizer
+# Kult Resizer 📐
 
 ## What is this?
 Kult Resizer is a simple PHP utility which can be used to resize images coming from an Amazon AWS S3 bucket. The images are resized and served on-the-fly but there's also a caching mechanism in order to optimize performance. It also supports subfolders, up to 1 level.
 The tool is meant to run as a standalone microservice, however it can also be included in an existing PHP project.
+
+[Live Demo](https://codepen.io/antoniocosentino/pen/MZVprp)
 
 ### Setup
 
