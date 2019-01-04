@@ -46,6 +46,10 @@ If you want to retrieve this file, on a resolution of max 400 pixels, just use t
 http://localhost:1811/amb_images/400/AMB_AS10000.jpg
 \
 This means that the image will be resized in a way that the bigger side will be 400px.
+
+If your file is not in a subfolder, but on the root level of the bucket ( _i.e. https://s3.eu-central-1.amazonaws.com/atw-images/logo.jpg_ ) just omit the folder parameter, like this:
+\
+http://localhost:1811/400/logo.jpg
 \
 \
 There is also a "contain" feature:

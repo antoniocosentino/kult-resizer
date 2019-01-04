@@ -21,11 +21,6 @@ include("config.inc.php");
 
 $original_folder = $_GET['folder'];
 
-// this allows to use the root level of the bucket
-if ($original_folder == "root") {
-    $original_folder = null;
-}
-
 $original_name = $_GET['file'];
 $newsize = $_GET['size'] ? $_GET['size'] : 500;
 
