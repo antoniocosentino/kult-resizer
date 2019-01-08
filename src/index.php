@@ -3,6 +3,7 @@ $env_debug_mode = getenv("DEBUG_MODE");
 
 if ($env_debug_mode == 0){
     $debug_mode = false;
+    ini_set('display_errors', 'Off');
 }
 else {
     $debug_mode = true;
@@ -11,10 +12,6 @@ else {
 if (!$_GET['file']) {
     echo "please provide filename";
     exit;
-}
-
-if (!$debug_mode) {
-    header('Content-Type: image/jpeg');
 }
 
 include("config.inc.php");
@@ -36,19 +33,28 @@ if (file_exists($resized_file)) {
         echo "FILE EXISTS";
         exit;
     }
+    if (!$debug_mode) {
+        header('Content-Type: image/jpeg');
+    }
     readfile($resized_file);
     exit;
 }
 // downloading the original file
 $thedownload = file_get_contents($url);
 
-if ($thedownload && $debug_mode) {
-    echo "<br />";
-    echo "DOWNLOAD SUCCESSFUL";
+if ($thedownload) {
+    if ($debug_mode) {
+        echo "<br />";
+        echo "DOWNLOAD SUCCESSFUL";
+    }
+    header('Content-Type: image/jpeg');
 }
-else if (!$thedownload && $debug_mode) {
-    echo "<br />";
-    echo "DOWNLOAD PROBLEM";
+else if (!$thedownload) {
+    if ($debug_mode) {
+        echo "<br />";
+        echo "DOWNLOAD PROBLEM";
+    }
+    header("HTTP/1.0 404 Not Found");
 }
 
 // copying it in the cache folder
@@ -62,7 +68,6 @@ else if (!$thecopy && $debug_mode) {
     echo "<br />";
     echo "COPY PROBLEM";
 }
-
 
 list($width, $height) = getimagesize($original_img);
 

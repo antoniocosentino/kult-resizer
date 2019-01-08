@@ -65,4 +65,5 @@ This means that the image will have max. width of 400px and max. height of 200px
 ### To-do
 - Currently only JPGs are supported. PNGs should be supported as well.
 - There is no cropping logic. It might be interesting to introduce a square-crop feature
-- When the path is wrong a black image is outputted. It should instead fail in a more "standard" way (i.e. 404)
+- Make debug mode logging less crappy :)
+- Add a way to flush the cache without needing to re-deploy the service or manually delete the cache folder
