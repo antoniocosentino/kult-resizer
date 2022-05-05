@@ -60,6 +60,12 @@ This means that the image will have max. width of 400px and max. height of 200px
 
 #
 
+### Demo
+
+[JSFiddle](https://jsfiddle.net/antoniocosentino/stbjvo6r/)
+
+#
+
 ### To-do
 - Currently only JPGs are supported. PNGs should be supported as well.
 - There is no cropping logic. It might be interesting to introduce a square-crop feature
