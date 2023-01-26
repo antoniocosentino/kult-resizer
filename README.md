@@ -58,11 +58,6 @@ http://localhost:1811/amb_images/400x200/AMB_AS10000.jpg
 \
 This means that the image will have max. width of 400px and max. height of 200px. The resulting image will be a proportioned image fitting inside these dimensions.
 
-#
-
-### Demo
-
-[JSFiddle](https://jsfiddle.net/antoniocosentino/stbjvo6r/)
 
 #
 
